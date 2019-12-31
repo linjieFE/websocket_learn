@@ -35,4 +35,14 @@ step1：终端=> vim .git/config
 ————————————————//再次push 应该就能拨开云雾见天日了
 ```
 
+## 第二课 建立websocket 服务器
+1）[git为我们提供了一个本地服务器搭建的依赖](https://github.com/sitegui/nodejs-websocket)
+https://github.com/sitegui/nodejs-websocket
+通过 
+```
+ npm install nodejs-websocket
+ 或者 一般 yarn 比较快
+ yarn add nodejs-websocket
+```
+
 

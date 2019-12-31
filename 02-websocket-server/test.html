@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .show{
+            border:1px solid gray;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 输入的内容 -->
+    <input type="text" placeholder="请输入你的内容">
+    <!-- 发送的请求 -->
+    <button>发送请求</button>
+    <!-- 显示结果 -->
+    <div class="show"></div>
+    <script>
+        var input =document.querySelector("input")
+        var btn =document.querySelector("button")
+        var div =document.querySelector("div")
+        var span =document.querySelector("span")
+        // 显示websocket在浏览器端如何使用
+        // h5 已经直接提人工工人了 websocket 的API,所以我们可以直接去使用
+
+        // 1.创建websocket => 直接new WebSocket()
+        // 参数1 : websocket 服务地址
+        var socket = new WebSocket('ws://localhost:3000');//注意：前面一定要加上ws://
+
+        //2. open :当WebSocket 服务连接成功的时候触发
+        socket.addEventListener('open',function(){
+            div.innerHTML='用户连接到服务了'
+        })
+
+        // 3. 点按钮的时候主动给服务发消息
+        btn.addEventListener('click',function(){
+            let val =  input.value
+            socket.send(val)
+            /**
+            * 打开非跨域chrome 填写表单发送请求
+            * 控制板->NetWork->WS(看到echo.websocket.org)->message中筛选all
+            */
+        })
+        // 4.接收 WebSocket 服务收到的数据
+        socket.addEventListener('message',function(e){
+            console.log(e)
+            // 重复3 动作 控制板收到消息
+            div.innerHTML=e.data
+        })
+
+        // 5. WebSocket 服务断开的事件
+        socket.addEventListener('close',function(e){
+            console.log(e)
+            // 重复3 动作 控制板收到消息
+            div.innerHTML='服务已断开连接'
+        })
+    </script>
+</body>
+</html> 
