@@ -11,7 +11,10 @@ https://developer.mozilla.org/zh-CN/docs/Web/API/WebSocket
     ```
 ![Alt 例图1](./1.jpeg "控制台查看websocket请求")
 ```
-/*ps:中间提交的时候遇到权限报错403 
+/*
+### ps:中间提交的时候遇到权限报错403
+### github push错误
+fatal: unable to access ‘https://github.com/用户名/项目名.git/’: The requested URL returned error: 403 
 解决方案：
 step1：终端=> vim .git/config
 ————————————————*/
