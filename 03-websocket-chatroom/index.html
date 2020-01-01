@@ -8,8 +8,23 @@
     <style>
         .show{
             border:1px solid gray;
-            width: 200px;
+            width: 350px;
             height: 200px;
+            padding: 5px;
+        }
+        input{
+            border: 1px solid black;
+            width: auto;
+            height: 18px;
+            margin-bottom: 5px;
+        }
+        button{
+            border: 1px solid #b7b7b7;
+        }
+        p{
+            font-size:14px;
+            color: black;
+            margin:1px 0;
         }
     </style>
 </head>
@@ -29,17 +44,19 @@
 
         // 1.创建websocket => 直接new WebSocket()
         // 参数1 : websocket 服务地址
-        var socket = new WebSocket('ws://localhost:3000');//注意：前面一定要加上ws://
+        var socket = new WebSocket('ws://localhost:8080') //'ws://echo.websocket.org' 为官方默认给的服务地址
 
         //2. open :当WebSocket 服务连接成功的时候触发
         socket.addEventListener('open',function(){
-            div.innerHTML='用户连接到服务了'
+            div.innerHTML='连接服务成功了'
         })
 
         // 3. 点按钮的时候主动给服务发消息
         btn.addEventListener('click',function(){
             let val =  input.value
             socket.send(val)
+            //发送信息后，input 清空
+            input.value=''
             /**
             * 打开非跨域chrome 填写表单发送请求
             * 控制板->NetWork->WS(看到echo.websocket.org)->message中筛选all
@@ -47,9 +64,21 @@
         })
         // 4.接收 WebSocket 服务收到的数据
         socket.addEventListener('message',function(e){
+            let data =JSON.parse(e.data)
             console.log(e)
             // 重复3 动作 控制板收到消息
-            div.innerHTML=e.data
+            // div.innerHTML=e.data
+            //给消息版叠加内容
+            let p = document.createElement("p")
+            p.innerText = data.msg + '---' + data.time
+            if(data.type ===0){
+                p.style.color='green'
+            }else if(data.type===1){
+                p.style.color='red'
+            }else{
+                p.style.color='blue'
+            }
+            div.appendChild(p)
         })
 
         // 5. WebSocket 服务断开的事件
@@ -60,4 +89,4 @@
         })
     </script>
 </body>
-</html> 
+</html>
