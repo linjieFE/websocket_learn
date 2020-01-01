@@ -45,4 +45,19 @@ https://github.com/sitegui/nodejs-websocket
  yarn add nodejs-websocket
 ```
 
+## 第三socket.io框架
+-- socket.io是不是库，可以浏览器和服务器之间实现实时，双向和基于事情和通信
+--- 1、node  详见https://socket.io/docs/#Using-with-Node-http-server
+--- 2、express
+```
+ yarn add socket.io
+ 或
+ npm install socket.io --save
+```
+[中文文档](https://www.w3cschool.cn/socket/)https://www.w3cschool.cn/socket/
+[官方文档](https://socket.io/)https://socket.io/
 
+### 基于express
+```
+yarn add socket.io express
+```
